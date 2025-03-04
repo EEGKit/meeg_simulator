@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome meeg_simulator documentation &#8212; meeg simulator 0.0.1 documentation</title>
+    <title>meeg_simulator package &#8212; meeg simulator 0.0.1 documentation</title>
   
   
   
@@ -42,12 +42,11 @@
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'meeg_simulator';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="meeg_simulator" href="modules.html" />
+    <link rel="next" title="meeg_simulator.simulator module" href="meeg_simulator.simulator.html" />
+    <link rel="prev" title="meeg_simulator" href="modules.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -105,7 +104,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -126,7 +125,7 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
+<li class="nav-item current active">
   <a class="nav-link nav-internal" href="modules.html">
     meeg_simulator
   </a>
@@ -182,6 +181,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -192,10 +195,8 @@
       
       
       
-        
-      
       <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -210,7 +211,7 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
+<li class="nav-item current active">
   <a class="nav-link nav-internal" href="modules.html">
     meeg_simulator
   </a>
@@ -245,6 +246,21 @@
     
   </div>
   
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">meeg_simulator package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="meeg_simulator.simulator.html">meeg_simulator.simulator module</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
       <div class="sidebar-primary-item">
@@ -265,7 +281,34 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none"></div>
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">meeg_simulator</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">meeg_simulator package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
               
               
               
@@ -273,40 +316,22 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="welcome-meeg-simulator-documentation">
-<h1>Welcome meeg_simulator documentation<a class="headerlink" href="#welcome-meeg-simulator-documentation" title="Link to this heading">#</a></h1>
-<p>meeg_simulator is a toolbox to simulate MEG/EEG data with pre-specified multivariate patterns representing experimental conditions of interest at specific time points.
-By simulating data with known, ground truth effects, it becomes possible to establish the valdity of the analysis pipelines developed for any event related experiment. With
-this toolbox, you can simulate data based on your very own experimental design and data set, and you can inject multivariate effects based on your own predictions. If you can detect
-these effects in your simulated data, you know that your pipeline is working as it should.</p>
-</section>
-<section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h1>
-<p>To install meeg_simulator, clone the meeg_simulator repository from
-<a class="github reference external" href="https://github.com/AlexLepauvre/meeg_simulator">AlexLepauvre/meeg_simulator</a> and run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>.
-</pre></div>
-</div>
-<p>PyPI and conda releases are planned for the future.</p>
+  <section id="meeg-simulator-package">
+<h1>meeg_simulator package<a class="headerlink" href="#meeg-simulator-package" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">meeg_simulator</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meeg_simulator.html">meeg_simulator package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/using_meeg_simulator.html">Motivation and Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/using_meeg_simulator.html#1.-Defining-an-Experimental-Design">1. Defining an Experimental Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/using_meeg_simulator.html#3.-Specifying-Time-Windows-for-the-Effects">3. Specifying Time Windows for the Effects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/using_meeg_simulator.html#4.-Simulating-the-Data">4. Simulating the Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/using_meeg_simulator.html#5.-Vizualizing-the-data:">5. Vizualizing the data:</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/using_meeg_simulator.html#6.-Decoding-analysis">6. Decoding analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/using_meeg_simulator.html#6.1.-Within-subject-analysis:">6.1. Within subject analysis:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/using_meeg_simulator.html#6.2.-Group-level-analysis">6.2. Group level analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meeg_simulator.simulator.html">meeg_simulator.simulator module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meeg_simulator.simulator.html#meeg_simulator.simulator.simulate_data"><code class="docutils literal notranslate"><span class="pre">simulate_data()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </div>
+</section>
+<section id="module-meeg_simulator">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-meeg_simulator" title="Link to this heading">#</a></h2>
+</section>
 </section>
 
 
@@ -319,12 +344,21 @@ these effects in your simulated data, you know that your pipeline is working as 
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
+    <a class="left-prev"
        href="modules.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">meeg_simulator</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="meeg_simulator.simulator.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">meeg_simulator</p>
+        <p class="prev-next-title">meeg_simulator.simulator module</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -334,6 +368,34 @@ these effects in your simulated data, you know that your pipeline is working as 
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-meeg_simulator">Module contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/meeg_simulator.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
               
             
           </div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; meeg simulator 0.0.1 documentation</title>
+    <title>meeg_simulator.simulator module &#8212; meeg simulator 0.0.1 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/meeg_simulator.simulator';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -193,10 +193,8 @@
       
       
       
-        
-      
       <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -246,6 +244,18 @@
     
   </div>
   
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">meeg_simulator.simulator module</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
       <div class="sidebar-primary-item">
@@ -281,7 +291,7 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">&lt;no title&gt;</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">meeg_simulator.simulator module</span></li>
   </ul>
 </nav>
 </div>
@@ -298,7 +308,52 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section id="module-meeg_simulator.simulator">
+<span id="meeg-simulator-simulator-module"></span><h1>meeg_simulator.simulator module<a class="headerlink" href="#module-meeg_simulator.simulator" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="meeg_simulator.simulator.simulate_data">
+<span class="sig-prename descclassname"><span class="pre">meeg_simulator.simulator.</span></span><span class="sig-name descname"><span class="pre">simulate_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_subjects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfreq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_win</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effects_amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spat_cov</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ch_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'eeg'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/meeg_simulator/simulator.html#simulate_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#meeg_simulator.simulator.simulate_data" title="Link to this definition">#</a></dt>
+<dd><p>Simulate epoched MEG/EEG data of the specified dimensions with multivariate patterns
+based on the specified experimental design. Effects can be specified to be present at
+specific time windows, constituting “ground truth” effects for testing sensitivity and
+specificity of analysis methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – Between-trial design matrix specifying experimental manipulations.
+Shape = [n_trials, n_experimental_conditions].</p></li>
+<li><p><strong>noise_std</strong> (<em>float</em>) – Standard deviation of additive Gaussian noise (before spatial covariance).</p></li>
+<li><p><strong>n_modes</strong> (<em>int</em>) – Number of modes (e.g., sensors/channels or components) in the final simulated data.</p></li>
+<li><p><strong>n_subjects</strong> (<em>int</em>) – Number of subjects to simulate.</p></li>
+<li><p><strong>tmin</strong> (<em>float</em>) – Start time (in seconds) of each epoch.</p></li>
+<li><p><strong>tmax</strong> (<em>float</em>) – End time (in seconds) of each epoch.</p></li>
+<li><p><strong>sfreq</strong> (<em>float</em>) – Sampling frequency (Hz).</p></li>
+<li><p><strong>t_win</strong> (<em>np.ndarray</em>) – An array of shape [n_effects, 2], specifying the (start_time, end_time)
+of the time window where each effect in <cite>effects</cite> should be non-zero.</p></li>
+<li><p><strong>effects</strong> (<em>np.ndarray</em>) – Indices of the conditions (columns in X) that actually manifest as
+time-locked effects. Each entry in <cite>effects</cite> corresponds to one row in <cite>t_win</cite>.</p></li>
+<li><p><strong>effects_amp</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Amplitude of the effects. The multivariate components are generated by sampling the beta parameter from a normal distribution
+across channels for a given experimental condition/contrast. This parameter specifies the variance of the normal distribution,
+which scales up or down multivariate patterns strength</p></li>
+<li><p><strong>spat_cov</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – A spatial covariance matrix of shape [n_modes, n_modes]. If None, an identity
+matrix is used (i.e., no correlation across modes).</p></li>
+<li><p><strong>ch_type</strong> (<em>string</em><em>, </em><em>optional</em><em>,</em>) – Type of the channels being simulated. Default eeg.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list (length = n_subjects). Each element is a mne epochs object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[mne.Epochs]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the number of rows in <cite>t_win</cite> does not match the length of <cite>effects</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
 
                 </article>
               
@@ -327,16 +382,16 @@
     <i class="fa-solid fa-list"></i> On this page
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#meeg_simulator.simulator.simulate_data"><code class="docutils literal notranslate"><span class="pre">simulate_data()</span></code></a></li>
 </ul>
-
   </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/reference/index.rst.txt"
+      <li><a href="../_sources/reference/meeg_simulator.simulator.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

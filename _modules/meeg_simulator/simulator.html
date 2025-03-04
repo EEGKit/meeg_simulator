@@ -1,0 +1,574 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>meeg_simulator.simulator &#8212; meeg simulator 0.0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/meeg_simulator/simulator';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">meeg simulator 0.0.1 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../modules.html">
+    meeg_simulator
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorial/using_meeg_simulator.html">
+    Motivation and Overview
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../modules.html">
+    meeg_simulator
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorial/using_meeg_simulator.html">
+    Motivation and Overview
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">meeg_simulator.simulator</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for meeg_simulator.simulator</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mne</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+
+<div class="viewcode-block" id="simulate_data">
+<a class="viewcode-back" href="../../reference/meeg_simulator.simulator.html#meeg_simulator.simulator.simulate_data">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_data</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">noise_std</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">n_modes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">n_subjects</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">tmin</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">tmax</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">sfreq</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">t_win</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">effects</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">effects_amp</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">spat_cov</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ch_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;eeg&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simulate epoched MEG/EEG data of the specified dimensions with multivariate patterns</span>
+<span class="sd">    based on the specified experimental design. Effects can be specified to be present at</span>
+<span class="sd">    specific time windows, constituting &quot;ground truth&quot; effects for testing sensitivity and</span>
+<span class="sd">    specificity of analysis methods.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X : np.ndarray</span>
+<span class="sd">        Between-trial design matrix specifying experimental manipulations.</span>
+<span class="sd">        Shape = [n_trials, n_experimental_conditions].</span>
+<span class="sd">    noise_std : float</span>
+<span class="sd">        Standard deviation of additive Gaussian noise (before spatial covariance).</span>
+<span class="sd">    n_modes : int</span>
+<span class="sd">        Number of modes (e.g., sensors/channels or components) in the final simulated data.</span>
+<span class="sd">    n_subjects : int</span>
+<span class="sd">        Number of subjects to simulate.</span>
+<span class="sd">    tmin : float</span>
+<span class="sd">        Start time (in seconds) of each epoch.</span>
+<span class="sd">    tmax : float</span>
+<span class="sd">        End time (in seconds) of each epoch.</span>
+<span class="sd">    sfreq : float</span>
+<span class="sd">        Sampling frequency (Hz).</span>
+<span class="sd">    t_win : np.ndarray</span>
+<span class="sd">        An array of shape [n_effects, 2], specifying the (start_time, end_time)</span>
+<span class="sd">        of the time window where each effect in `effects` should be non-zero.</span>
+<span class="sd">    effects : np.ndarray</span>
+<span class="sd">        Indices of the conditions (columns in X) that actually manifest as</span>
+<span class="sd">        time-locked effects. Each entry in `effects` corresponds to one row in `t_win`.</span>
+<span class="sd">    effects_amp : np.ndarray, optional</span>
+<span class="sd">        Amplitude of the effects. The multivariate components are generated by sampling the beta parameter from a normal distribution</span>
+<span class="sd">        across channels for a given experimental condition/contrast. This parameter specifies the variance of the normal distribution,</span>
+<span class="sd">        which scales up or down multivariate patterns strength</span>
+<span class="sd">    spat_cov : np.ndarray, optional</span>
+<span class="sd">        A spatial covariance matrix of shape [n_modes, n_modes]. If None, an identity</span>
+<span class="sd">        matrix is used (i.e., no correlation across modes).</span>
+<span class="sd">    ch_type : string, optional,</span>
+<span class="sd">        Type of the channels being simulated. Default eeg.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List[mne.Epochs]</span>
+<span class="sd">        A list (length = n_subjects). Each element is a mne epochs object</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the number of rows in `t_win` does not match the length of `effects`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="c1"># 1. Check inputs &amp; compute the number of samples</span>
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">effects</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t_win</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;The dimension of &#39;effects&#39; and &#39;t_win&#39; do not match! &quot;</span>
+            <span class="s2">&quot;There should be exactly one time window for each effect.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">effects_amp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">effects_amp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">32</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">effects</span><span class="p">)</span>
+    <span class="n">n_trials</span><span class="p">,</span> <span class="n">n_exp_conditions</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+    <span class="c1"># Make sure we get an integer sample count:</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">tmax</span> <span class="o">-</span> <span class="n">tmin</span><span class="p">)</span> <span class="o">*</span> <span class="n">sfreq</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">n_samples</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Derived &#39;n_samples&#39; must be positive. Check tmin, tmax, and sfreq.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Prepare info for epochs object in the end</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">create_info</span><span class="p">(</span>
+        <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;CH</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">03</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_modes</span><span class="p">)],</span> <span class="n">ch_types</span><span class="o">=</span><span class="p">[</span><span class="n">ch_type</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_modes</span><span class="p">,</span> <span class="n">sfreq</span><span class="o">=</span><span class="n">sfreq</span>
+    <span class="p">)</span>
+
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="c1"># 2. Create a time vector for each epoch and the FIR (identity) within-trial design</span>
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">n_samples</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="c1"># Identity matrix =&gt; one column per time point</span>
+    <span class="n">Xt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>  <span class="c1"># shape =&gt; [n_samples, n_samples]</span>
+
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="c1"># 3. Build a &quot;time activation&quot; matrix for each experimental condition</span>
+    <span class="c1">#    cv.shape =&gt; [n_samples, n_exp_conditions]</span>
+    <span class="c1">#    This marks time points in which each condition is active (1) or inactive (0)</span>
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="n">cv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_exp_conditions</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">eff_cond</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">effects</span><span class="p">):</span>
+        <span class="c1"># Identify which samples lie in the desired time window</span>
+        <span class="n">start_t</span><span class="p">,</span> <span class="n">end_t</span> <span class="o">=</span> <span class="n">t_win</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="c1"># Mask for t in [start_t, end_t]</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span> <span class="o">&gt;=</span> <span class="n">start_t</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">t</span> <span class="o">&lt;=</span> <span class="n">end_t</span><span class="p">)</span>
+        <span class="n">cv</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">eff_cond</span><span class="p">]</span> <span class="o">=</span> <span class="n">effects_amp</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="c1"># 4. Construct the full design matrix with the Kronecker product</span>
+    <span class="c1">#    shape =&gt; [n_trials*n_samples, n_exp_conditions*n_samples]</span>
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="n">X_full</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Xt</span><span class="p">)</span>
+
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="c1"># 5. Intercept term across all trials and samples</span>
+    <span class="c1">#    shape =&gt; [n_trials*n_samples, 1]</span>
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="n">X0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n_trials</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="c1"># 6. Prepare or validate spatial covariance</span>
+    <span class="c1">#    - If none given, we assume an identity (no cross-mode correlation).</span>
+    <span class="c1">#    - Must be shape =&gt; [n_modes, n_modes] if provided.</span>
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="k">if</span> <span class="n">spat_cov</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">spat_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_modes</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">spat_cov</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="n">n_modes</span><span class="p">,</span> <span class="n">n_modes</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;spat_cov must be shape (</span><span class="si">{</span><span class="n">n_modes</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">n_modes</span><span class="si">}</span><span class="s2">), &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;but got </span><span class="si">{</span><span class="n">spat_cov</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="c1"># 7. Prepare outputs: loop over subjects and simulate data</span>
+    <span class="c1"># ---------------------------------------------------------------------</span>
+    <span class="n">simulated_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Flatten cv to shape [n_samples*n_exp_conditions] so we can build a diagonal &quot;selector&quot;</span>
+    <span class="c1"># and multiply it by random effects. That ensures only certain (time, condition) combos</span>
+    <span class="c1"># end up non-zero.</span>
+    <span class="n">cv_diagonal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span>
+        <span class="n">cv</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="p">)</span>  <span class="c1"># shape =&gt; [n_samples*n_exp_conditions, n_samples*n_exp_conditions]</span>
+
+    <span class="c1"># Each subject gets unique random draws</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subjects</span><span class="p">):</span>
+        <span class="c1"># --------------------------------------------------</span>
+        <span class="c1"># 7a. Build subject-specific effect weights</span>
+        <span class="c1">#     shape =&gt; [n_samples*n_exp_conditions, n_modes]</span>
+        <span class="c1"># --------------------------------------------------</span>
+        <span class="c1"># Generate beta parameters randomy sampled from a standard normal distribution,</span>
+        <span class="c1"># but using CV to set the effects to their desired effect sizes. Adding spatial covariance across effects</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">cv_diagonal</span>
+            <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span> <span class="o">*</span> <span class="n">n_exp_conditions</span><span class="p">,</span> <span class="n">n_modes</span><span class="p">)</span>
+            <span class="o">@</span> <span class="n">spat_cov</span>
+        <span class="p">)</span>  <span class="c1"># shape =&gt; [n_samples*n_exp_conditions, n_modes]</span>
+
+        <span class="c1"># --------------------------------------------------</span>
+        <span class="c1"># 7b. Combine with the full design</span>
+        <span class="c1">#     shape =&gt; [n_trials*n_samples, n_modes]</span>
+        <span class="c1"># --------------------------------------------------</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">X_full</span> <span class="o">@</span> <span class="n">B</span>
+
+        <span class="c1"># --------------------------------------------------</span>
+        <span class="c1"># 7c. Add intercept</span>
+        <span class="c1">#     shape =&gt; [n_trials*n_samples, n_modes]</span>
+        <span class="c1"># --------------------------------------------------</span>
+        <span class="n">B0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_modes</span><span class="p">)</span> <span class="o">/</span> <span class="mf">16.0</span>
+        <span class="n">intercept</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">@</span> <span class="n">B0</span>
+        <span class="n">data</span> <span class="o">+=</span> <span class="n">intercept</span>
+
+        <span class="c1"># --------------------------------------------------</span>
+        <span class="c1"># 7d. Add noise (spatially correlated)</span>
+        <span class="c1"># --------------------------------------------------</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_trials</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_modes</span><span class="p">)</span>
+        <span class="c1"># Apply spatial covariance</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">noise</span> <span class="o">@</span> <span class="n">spat_cov</span>
+        <span class="n">noise</span> <span class="o">*=</span> <span class="n">noise_std</span>
+
+        <span class="n">data</span> <span class="o">+=</span> <span class="n">noise</span>
+
+        <span class="c1"># --------------------------------------------------</span>
+        <span class="c1"># 7e. Store simulated data for this subject</span>
+        <span class="c1"># --------------------------------------------------</span>
+        <span class="c1"># Reshape the data:</span>
+        <span class="c1"># Reshape to [N, T, C] (trials x time x channels)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">n_trials</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">n_modes</span><span class="p">]),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="n">simulated_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mne</span><span class="o">.</span><span class="n">EpochsArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">tmin</span><span class="o">=</span><span class="n">tmin</span><span class="p">,</span> <span class="n">reject_tmin</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">simulated_data</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Alex Lepauvre.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
