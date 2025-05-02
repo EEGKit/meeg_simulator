@@ -287,10 +287,172 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
-<p>Below you will find the public classes and functions in this package.</p>
-<div class="toctree-wrapper compound">
+  <section id="module-multisim.Simulator">
+<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-multisim.Simulator" title="Link to this heading">#</a></h1>
+<p>Simulate epoched MEG/EEG data with multivariate patterns.</p>
+<p>This class generates simulated EEG/MEG data with predefined experimental
+effects, allowing for controlled evaluation of analysis methods. Effects are
+introduced at specified time windows, serving as ground truth signals.</p>
+<p>The method used here is based on the approach implemented in <strong>SPM’s `DEMO_CVA_RSA.m`</strong>
+function, originally developed by <strong>Karl Friston and Peter Zeidman</strong> <a class="reference internal" href="#re1eaaf3cd5bf-1" id="id1">[1]</a>.
+Our implementation extends their method by incorporating <strong>time-resolved effects</strong>,
+allowing for dynamic experimental manipulations over specified time windows.</p>
+<dl class="field-list">
+<dt class="field-odd">param X<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Between-trial design matrix specifying experimental manipulations.</p>
+</dd>
+<dt class="field-even">type X<span class="colon">:</span></dt>
+<dd class="field-even"><p>array, shape (n_epochs, n_experimental_conditions)</p>
+</dd>
+<dt class="field-odd">param noise_std<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Standard deviation of additive Gaussian noise (applied before spatial covariance).</p>
+</dd>
+<dt class="field-even">type noise_std<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">param n_channels<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of spatial modes (e.g., sensors or components) in the simulated data.</p>
+</dd>
+<dt class="field-even">type n_channels<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+<dt class="field-odd">param n_subjects<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of subjects to simulate.</p>
+</dd>
+<dt class="field-even">type n_subjects<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+<dt class="field-odd">param tmin<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Start time (in seconds) of each epoch.</p>
+</dd>
+<dt class="field-even">type tmin<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">param tmax<span class="colon">:</span></dt>
+<dd class="field-odd"><p>End time (in seconds) of each epoch.</p>
+</dd>
+<dt class="field-even">type tmax<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">param sfreq<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sampling frequency in Hz.</p>
+</dd>
+<dt class="field-even">type sfreq<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">param t_win<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time windows (start, end) in seconds where each experimental effect is nonzero.</p>
+</dd>
+<dt class="field-even">type t_win<span class="colon">:</span></dt>
+<dd class="field-even"><p>array, shape (n_effects, 2)</p>
+</dd>
+<dt class="field-odd">param effects<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Indices of the experimental conditions (columns of <cite>X</cite>) associated with
+time-locked effects. Each entry corresponds to a row in <cite>t_win</cite>.</p>
+</dd>
+<dt class="field-even">type effects<span class="colon">:</span></dt>
+<dd class="field-even"><p>array, shape (n_effects,)</p>
+</dd>
+<dt class="field-odd">param effects_amp<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Amplitudes of the effects. Effects are simulated by sampling beta parameters
+from a normal distribution across channels, with <cite>effects_amp</cite> defining
+the variance of the distribution. Do not specify if you use effect size
+and reciprocally. Default is None (use effect size instead).</p>
+</dd>
+<dt class="field-even">type effects_amp<span class="colon">:</span></dt>
+<dd class="field-even"><p>array, shape (n_effects,) | None, optional</p>
+</dd>
+<dt class="field-odd">param effect_size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Standardized multivariate effect size (Mahalanobis distance) for each effect.
+Internally converted to an amplitude <cite>a</cite> (which scales the spread of the betas)
+by solving:</p>
+<blockquote>
+<div><p>d’ = a / σ · √(vᵀ Σ⁻¹ v)</p>
+</div></blockquote>
+<p>for a, where
+- σ = <cite>noise_std</cite>,
+- Σ = <cite>ch_cov</cite> (sensor covariance),
+- v = spatial pattern (unit vector across modes).
+Thus the injected β-weights satisfy a Mahalanobis distance of d’
+between condition centroids, yielding theoretical decoding
+accuracy ≈ Φ(d’/2). Do not use if you specify effects_amp directly
+Default is 0.5</p>
+</dd>
+<dt class="field-even">type effect_size<span class="colon">:</span></dt>
+<dd class="field-even"><p>array, shape (n_effects,), optional</p>
+</dd>
+<dt class="field-odd">param ch_cov<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Channel data covariance matrix for the simulated data. If None, an identity
+matrix is used (i.e., no cross-channel correlations).</p>
+</dd>
+<dt class="field-even">type ch_cov<span class="colon">:</span></dt>
+<dd class="field-even"><p>array, shape (n_channels, n_channels) | None, optional</p>
+</dd>
+<dt class="field-odd">param ch_type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Type of simulated channels, e.g., <cite>‘eeg’</cite> or <cite>‘meg’</cite>. Default is <cite>‘eeg’</cite>.</p>
+</dd>
+<dt class="field-even">type ch_type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str, optional</p>
+</dd>
+<dt class="field-odd">param kern<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Temporal kernel. Should be 1 dimensional. If none, no temporal kernel is applied</p>
+</dd>
+<dt class="field-even">type kern<span class="colon">:</span></dt>
+<dd class="field-even"><p>array, shape (n_samples, ), optional</p>
+</dd>
+<dt class="field-odd">param intersub_noise_std<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Inter subject standard deviation in the effect amp. If not specified, assume no
+inter subject variability</p>
+</dd>
+<dt class="field-even">type intersub_noise_std<span class="colon">:</span></dt>
+<dd class="field-even"><p>float, optional</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multisim.Simulator.data">
+<span class="sig-prename descclassname"><span class="pre">multisim.Simulator.</span></span><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#multisim.Simulator.data" title="Link to this definition">#</a></dt>
+<dd><p>Simulated data for each subject.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of np.ndarray of shape (n_epochs, n_channels, n_samples)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">raises ValueError<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the number of rows in <cite>t_win</cite> does not match the length of <cite>effects</cite>.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This function follows the <strong>same methodological principles</strong> as <cite>DEMO_CVA_RSA.m</cite> from SPM,
+but extends it by adding time-resolved experimental effects.</p></li>
+<li><p>The original implementation in SPM was developed by <strong>Karl Friston and Peter Zeidman</strong>.</p></li>
+<li><p>The generated data follows an event-related structure, suitable for
+classification and decoding analyses.</p></li>
+<li><p>Effects are injected into selected experimental conditions based on <cite>X</cite>.</p></li>
+</ul>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="re1eaaf3cd5bf-1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Friston, K., &amp; Zeidman, P. “DEMO_CVA_RSA.m”, Statistical Parametric Mapping (SPM).</p>
+</div>
+</div>
+<p>Available at: <a class="github reference external" href="https://github.com/spm/spm/blob/main/toolbox/DEM/DEMO_CVA_RSA.m">spm/spm</a></p>
+<p class="rubric">Examples</p>
+<p>Simulating a simple dataset with 20 subjects and a single experimental effect:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">meeg_simulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">simulate_data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 100 trials, 2 experimental conditions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t_win</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>  <span class="c1"># Effect between 200-500 ms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">effects</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Effect corresponds to second column of X</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">epochs_list</span> <span class="o">=</span> <span class="n">simulate_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">noise_std</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">n_channels</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">n_subjects</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">tmin</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">sfreq</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">t_win</span><span class="o">=</span><span class="n">t_win</span><span class="p">,</span> <span class="n">effects</span><span class="o">=</span><span class="n">effects</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">epochs_list</span><span class="p">))</span>  <span class="c1"># Should return 20 subjects</span>
+</pre></div>
 </div>
 </section>
 
@@ -332,6 +494,18 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multisim.Simulator.data"><code class="docutils literal notranslate"><span class="pre">data</span></code></a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">
