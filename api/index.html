@@ -287,83 +287,38 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-multisim.Simulator">
-<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-multisim.Simulator" title="Link to this heading">#</a></h1>
+  <section id="module-multisim.simulator">
+<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-multisim.simulator" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="multisim.simulator.Simulator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multisim.simulator.</span></span><span class="sig-name descname"><span class="pre">Simulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_subjects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfreq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_win</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effects_amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effect_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ch_cov</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intersub_noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multisim.simulator.Simulator" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Simulate epoched MEG/EEG data with multivariate patterns.</p>
 <p>This class generates simulated EEG/MEG data with predefined experimental
 effects, allowing for controlled evaluation of analysis methods. Effects are
 introduced at specified time windows, serving as ground truth signals.</p>
 <p>The method used here is based on the approach implemented in <strong>SPM’s `DEMO_CVA_RSA.m`</strong>
-function, originally developed by <strong>Karl Friston and Peter Zeidman</strong> <a class="reference internal" href="#re1eaaf3cd5bf-1" id="id1">[1]</a>.
+function, originally developed by <strong>Karl Friston and Peter Zeidman</strong> <a class="reference internal" href="#r8d021a6f7dbe-1" id="id1">[1]</a>.
 Our implementation extends their method by incorporating <strong>time-resolved effects</strong>,
 allowing for dynamic experimental manipulations over specified time windows.</p>
-<dl class="field-list">
-<dt class="field-odd">param X<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Between-trial design matrix specifying experimental manipulations.</p>
-</dd>
-<dt class="field-even">type X<span class="colon">:</span></dt>
-<dd class="field-even"><p>array, shape (n_epochs, n_experimental_conditions)</p>
-</dd>
-<dt class="field-odd">param noise_std<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Standard deviation of additive Gaussian noise (applied before spatial covariance).</p>
-</dd>
-<dt class="field-even">type noise_std<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-<dt class="field-odd">param n_channels<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Number of spatial modes (e.g., sensors or components) in the simulated data.</p>
-</dd>
-<dt class="field-even">type n_channels<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-<dt class="field-odd">param n_subjects<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Number of subjects to simulate.</p>
-</dd>
-<dt class="field-even">type n_subjects<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-<dt class="field-odd">param tmin<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Start time (in seconds) of each epoch.</p>
-</dd>
-<dt class="field-even">type tmin<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-<dt class="field-odd">param tmax<span class="colon">:</span></dt>
-<dd class="field-odd"><p>End time (in seconds) of each epoch.</p>
-</dd>
-<dt class="field-even">type tmax<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-<dt class="field-odd">param sfreq<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Sampling frequency in Hz.</p>
-</dd>
-<dt class="field-even">type sfreq<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-<dt class="field-odd">param t_win<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Time windows (start, end) in seconds where each experimental effect is nonzero.</p>
-</dd>
-<dt class="field-even">type t_win<span class="colon">:</span></dt>
-<dd class="field-even"><p>array, shape (n_effects, 2)</p>
-</dd>
-<dt class="field-odd">param effects<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Indices of the experimental conditions (columns of <cite>X</cite>) associated with
-time-locked effects. Each entry corresponds to a row in <cite>t_win</cite>.</p>
-</dd>
-<dt class="field-even">type effects<span class="colon">:</span></dt>
-<dd class="field-even"><p>array, shape (n_effects,)</p>
-</dd>
-<dt class="field-odd">param effects_amp<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Amplitudes of the effects. Effects are simulated by sampling beta parameters
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_epochs</em><em>, </em><em>n_experimental_conditions</em><em>)</em>) – Between-trial design matrix specifying experimental manipulations.</p></li>
+<li><p><strong>noise_std</strong> (<em>float</em>) – Standard deviation of additive Gaussian noise (applied before spatial covariance).</p></li>
+<li><p><strong>n_channels</strong> (<em>int</em>) – Number of spatial modes (e.g., sensors or components) in the simulated data.</p></li>
+<li><p><strong>n_subjects</strong> (<em>int</em>) – Number of subjects to simulate.</p></li>
+<li><p><strong>tmin</strong> (<em>float</em>) – Start time (in seconds) of each epoch.</p></li>
+<li><p><strong>tmax</strong> (<em>float</em>) – End time (in seconds) of each epoch.</p></li>
+<li><p><strong>sfreq</strong> (<em>float</em>) – Sampling frequency in Hz.</p></li>
+<li><p><strong>t_win</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_effects</em><em>, </em><em>2</em><em>)</em>) – Time windows (start, end) in seconds where each experimental effect is nonzero.</p></li>
+<li><p><strong>effects</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_effects</em><em>,</em><em>)</em>) – Indices of the experimental conditions (columns of <cite>X</cite>) associated with
+time-locked effects. Each entry corresponds to a row in <cite>t_win</cite>.</p></li>
+<li><p><strong>effects_amp</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_effects</em><em>,</em><em>) </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – Amplitudes of the effects. Effects are simulated by sampling beta parameters
 from a normal distribution across channels, with <cite>effects_amp</cite> defining
 the variance of the distribution. Do not specify if you use effect size
-and reciprocally. Default is None (use effect size instead).</p>
-</dd>
-<dt class="field-even">type effects_amp<span class="colon">:</span></dt>
-<dd class="field-even"><p>array, shape (n_effects,) | None, optional</p>
-</dd>
-<dt class="field-odd">param effect_size<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Standardized multivariate effect size (Mahalanobis distance) for each effect.
+and reciprocally. Default is None (use effect size instead).</p></li>
+<li><p><strong>effect_size</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_effects</em><em>,</em><em>)</em><em>, </em><em>optional</em>) – <p>Standardized multivariate effect size (Mahalanobis distance) for each effect.
 Internally converted to an amplitude <cite>a</cite> (which scales the spread of the betas)
 by solving:</p>
 <blockquote>
@@ -377,40 +332,19 @@ Thus the injected β-weights satisfy a Mahalanobis distance of d’
 between condition centroids, yielding theoretical decoding
 accuracy ≈ Φ(d’/2). Do not use if you specify effects_amp directly
 Default is 0.5</p>
-</dd>
-<dt class="field-even">type effect_size<span class="colon">:</span></dt>
-<dd class="field-even"><p>array, shape (n_effects,), optional</p>
-</dd>
-<dt class="field-odd">param ch_cov<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Channel data covariance matrix for the simulated data. If None, an identity
-matrix is used (i.e., no cross-channel correlations).</p>
-</dd>
-<dt class="field-even">type ch_cov<span class="colon">:</span></dt>
-<dd class="field-even"><p>array, shape (n_channels, n_channels) | None, optional</p>
-</dd>
-<dt class="field-odd">param ch_type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Type of simulated channels, e.g., <cite>‘eeg’</cite> or <cite>‘meg’</cite>. Default is <cite>‘eeg’</cite>.</p>
-</dd>
-<dt class="field-even">type ch_type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str, optional</p>
-</dd>
-<dt class="field-odd">param kern<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Temporal kernel. Should be 1 dimensional. If none, no temporal kernel is applied</p>
-</dd>
-<dt class="field-even">type kern<span class="colon">:</span></dt>
-<dd class="field-even"><p>array, shape (n_samples, ), optional</p>
-</dd>
-<dt class="field-odd">param intersub_noise_std<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Inter subject standard deviation in the effect amp. If not specified, assume no
-inter subject variability</p>
-</dd>
-<dt class="field-even">type intersub_noise_std<span class="colon">:</span></dt>
-<dd class="field-even"><p>float, optional</p>
+</p></li>
+<li><p><strong>ch_cov</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_channels</em><em>, </em><em>n_channels</em><em>) </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – Channel data covariance matrix for the simulated data. If None, an identity
+matrix is used (i.e., no cross-channel correlations).</p></li>
+<li><p><strong>ch_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of simulated channels, e.g., <cite>‘eeg’</cite> or <cite>‘meg’</cite>. Default is <cite>‘eeg’</cite>.</p></li>
+<li><p><strong>kern</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em><em>, </em><em>optional</em>) – Temporal kernel. Should be 1 dimensional. If none, no temporal kernel is applied</p></li>
+<li><p><strong>intersub_noise_std</strong> (<em>float</em><em>, </em><em>optional</em>) – Inter subject standard deviation in the effect amp. If not specified, assume no
+inter subject variability</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="multisim.Simulator.data">
-<span class="sig-prename descclassname"><span class="pre">multisim.Simulator.</span></span><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#multisim.Simulator.data" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multisim.simulator.Simulator.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#multisim.simulator.Simulator.data" title="Link to this definition">#</a></dt>
 <dd><p>Simulated data for each subject.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -420,8 +354,8 @@ inter subject variability</p>
 </dd></dl>
 
 <dl class="field-list simple">
-<dt class="field-odd">raises ValueError<span class="colon">:</span></dt>
-<dd class="field-odd"><p>If the number of rows in <cite>t_win</cite> does not match the length of <cite>effects</cite>.</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the number of rows in <cite>t_win</cite> does not match the length of <cite>effects</cite>.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -435,7 +369,7 @@ classification and decoding analyses.</p></li>
 </ul>
 <p class="rubric">References</p>
 <div role="list" class="citation-list">
-<div class="citation" id="re1eaaf3cd5bf-1" role="doc-biblioentry">
+<div class="citation" id="r8d021a6f7dbe-1" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>Friston, K., &amp; Zeidman, P. “DEMO_CVA_RSA.m”, Statistical Parametric Mapping (SPM).</p>
 </div>
@@ -454,6 +388,93 @@ classification and decoding analyses.</p></li>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">epochs_list</span><span class="p">))</span>  <span class="c1"># Should return 20 subjects</span>
 </pre></div>
 </div>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#multisim.simulator.Simulator.export_to_eeglab" title="multisim.simulator.Simulator.export_to_eeglab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export_to_eeglab</span></code></a>([X, cond_names, mapping, ...])</p></td>
+<td><p>Export the simulated data to EEGLAB format (save to file).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#multisim.simulator.Simulator.export_to_mne" title="multisim.simulator.Simulator.export_to_mne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export_to_mne</span></code></a>([ch_type, X, cond_names, mapping])</p></td>
+<td><p>Export the simulated data to MNE-Python format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#multisim.simulator.Simulator.generate_events" title="multisim.simulator.Simulator.generate_events"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_events</span></code></a>([X, cond_names, mapping])</p></td>
+<td><p>Generate MNE-compatible events and event_id dictionary from a design matrix.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="multisim.simulator.Simulator.export_to_eeglab">
+<span class="sig-name descname"><span class="pre">export_to_eeglab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cond_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname_template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'sub-{:02d}.set'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#multisim.simulator.Simulator.export_to_eeglab" title="Link to this definition">#</a></dt>
+<dd><p>Export the simulated data to EEGLAB format (save to file).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ch_type</strong> (<em>str</em>) – Type of simulated channels, e.g., ‘eeg’ or ‘meg’. Default is ‘eeg’.</p></li>
+<li><p><strong>root</strong> (<em>str</em>) – Directory where the files will be saved. Default is current directory ‘.’.</p></li>
+<li><p><strong>fname_template</strong> (<em>str</em>) – Filename template for each subject, with a placeholder for the subject index.
+Default is ‘subject_{:02d}.set’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Requires ‘mne’ and ‘eeglabio’ packages.
+Each subject’s data will be saved as a separate EEGLAB file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multisim.simulator.Simulator.export_to_mne">
+<span class="sig-name descname"><span class="pre">export_to_mne</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'eeg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cond_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#multisim.simulator.Simulator.export_to_mne" title="Link to this definition">#</a></dt>
+<dd><p>Export the simulated data to MNE-Python format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ch_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of the simulated channels</p></li>
+<li><p><strong>X</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_trials</em><em>, </em><em>n_conditions</em><em>)</em><em>, </em><em>optional</em>) – Design matrix to use. If None, defaults to self.X.</p></li>
+<li><p><strong>cond_names</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Names of the experimental conditions (columns of X).
+If None, defaults to [“cond1”, “cond2”, …, “condN”].</p></li>
+<li><p><strong>mapping</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary specifying custom label mapping per condition.
+Format: {condition_name: {original_value: label, …}, …}</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of MNE-Python EpochsArray objects for each subject.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of mne.EpochsArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multisim.simulator.Simulator.generate_events">
+<span class="sig-name descname"><span class="pre">generate_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cond_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#multisim.simulator.Simulator.generate_events" title="Link to this definition">#</a></dt>
+<dd><p>Generate MNE-compatible events and event_id dictionary from a design matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_trials</em><em>, </em><em>n_conditions</em><em>)</em><em>, </em><em>optional</em>) – Design matrix to use. If None, defaults to self.X.</p></li>
+<li><p><strong>cond_names</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Names of the experimental conditions (columns of X).
+If None, defaults to [“cond1”, “cond2”, …, “condN”].</p></li>
+<li><p><strong>mapping</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary specifying custom label mapping per condition.
+Format: {condition_name: {original_value: label, …}, …}</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>events</strong> (<em>np.ndarray, shape (n_trials, 3)</em>) – Array of [onset_sample, 0, event_id] per trial.</p></li>
+<li><p><strong>event_id</strong> (<em>dict</em>) – Dictionary mapping label string to event integer.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -503,7 +524,13 @@ classification and decoding analyses.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multisim.Simulator.data"><code class="docutils literal notranslate"><span class="pre">data</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multisim.simulator.Simulator"><code class="docutils literal notranslate"><span class="pre">Simulator</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multisim.simulator.Simulator.data"><code class="docutils literal notranslate"><span class="pre">Simulator.data</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multisim.simulator.Simulator.export_to_eeglab"><code class="docutils literal notranslate"><span class="pre">Simulator.export_to_eeglab()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multisim.simulator.Simulator.export_to_mne"><code class="docutils literal notranslate"><span class="pre">Simulator.export_to_mne()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multisim.simulator.Simulator.generate_events"><code class="docutils literal notranslate"><span class="pre">Simulator.generate_events()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
