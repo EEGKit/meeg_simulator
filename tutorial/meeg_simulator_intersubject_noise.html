@@ -1,0 +1,906 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Simulating multivariate effects with intersubject variability &#8212; meeg_simulator 0.0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/meeg_simulator_intersubject_noise';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MEEG Simulator</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html">
+    Tutorials
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html">
+    Tutorials
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Simulating multivariate effects with intersubject variability</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <style>
+/* Hide Notebook Titles from Sidebar */
+.toctree-wrapper > ul { display: none !important; }
+</style><section id="Simulating-multivariate-effects-with-intersubject-variability">
+<h1>Simulating multivariate effects with intersubject variability<a class="headerlink" href="#Simulating-multivariate-effects-with-intersubject-variability" title="Link to this heading">#</a></h1>
+<p>In the previous examples, we used the default parameter for the amplitude of the effect. This parameter can be adjusted to modulate the decoding accuracy (though note that the final accuracy depends both on the noise and the amplitude of the effect, as for the same amplitude, decoding accuracy is higher with lower noise). Importantly, the amplitude of the effect was assumed to be fixed across participants. However, in most data sets, that will not be the case, as the <strong>true</strong> decoding accuracy
+surely varies between participants.</p>
+<p>In order to simulate between participants variability, you can specify a noise parameter. Specifically, instead of simulating multivariate effect of the same strength across participants, we draw the effect strength from a normal distribution with a given mean and standard deviation.</p>
+<section id="1.-Setting-up-the-simulation">
+<h2>1. Setting up the simulation<a class="headerlink" href="#1.-Setting-up-the-simulation" title="Link to this heading">#</a></h2>
+<p>We will stick to the same parameters as before, with the kernel and everything, just adding the noise parameter.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+from scipy.stats import gamma as gamma_dist
+import matplotlib.pyplot as plt
+
+# Creating the design matrix of our 2 by two balanced design:
+X = np.array([[1, 1, -1, -1] * 40, [1, -1] * 80]).T
+
+# Add descriptors:
+cond_names = [&quot;category&quot;, &quot;attention&quot;]
+mapping = {
+    &quot;category&quot;: {1: &quot;face&quot;, -1: &quot;object&quot;},
+    &quot;attention&quot;: {1: &quot;attended&quot;, -1: &quot;unattended&quot;},
+}
+
+# The &#39;effects&#39; array tells us which columns in X are &#39;active&#39; at each time window.
+# Here we say effect 0 =&gt; category, effect 1 =&gt; attention
+effects = np.array([0, 1])
+
+# For each effects, define a 2x2 array where each row is [start_ms, end_ms]
+t_win = np.array(
+    [
+        [0.100, 0.200],  # Condition 0 active window
+        [0.300, 0.400],  # Condition 1 active window
+    ]
+)
+
+# Effect size:
+effect_size = [0.5, 0.5]
+
+# Data parameters:
+n_channels = 32  # EEG system with 32 electrodes
+n_subjects = 20  # Recording from 20 subjects
+noise_std = 1 / 2  # Variance of the data
+ch_cov = None  # Assuming that the data of each sensor are independent
+sfreq = 50  # Simulating data at 50Hz
+tmin = -0.25
+tmax = 1.0
+
+# Generate our kernel:
+t = np.arange(0, 1, 1 / sfreq)  # time vector (in seconds)
+kernel = gamma_dist(a=2, scale=0.08).pdf(t)
+kernel /= kernel.max() * 5  # Normalize peak to 0.25
+
+# Between subject noise:
+intersub_noise_std = 1 / 8
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.-Simulating-the-data">
+<h2>2. Simulating the data<a class="headerlink" href="#2.-Simulating-the-data" title="Link to this heading">#</a></h2>
+<p>The simulation of the data is exactly the same as before, except with the addition of intersubjects noise:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from multisim import Simulator
+
+sims = Simulator(
+    X,  # Design matrix
+    noise_std,  # Observation noise
+    n_channels,  # Number of channelss
+    n_subjects,  # Number of subjects
+    tmin,
+    tmax,  # Start and end of epochs
+    sfreq,  # Sampling frequency of the data
+    t_win,  # Time window of the effects
+    effects,  # Which effects
+    ch_cov=ch_cov,  # Spatial covariance of the data
+    effect_size=effect_size,  # Effect size
+    kern=kernel,  # Temporal kernel,
+    intersub_noise_std=intersub_noise_std,  # Intersubject variability
+)
+epochs = sims.export_to_mne(X=X[:, :2], cond_names=cond_names, mapping=mapping)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+</pre></div></div>
+</div>
+</section>
+<section id="3.-Decoding-analysis-and-plotting">
+<h2>3. Decoding analysis and plotting<a class="headerlink" href="#3.-Decoding-analysis-and-plotting" title="Link to this heading">#</a></h2>
+<p>We will perform the analysis on all subjects and show how the added between subject noise changes the results</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.svm import SVC
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from mne.decoding import SlidingEstimator, cross_val_multiscore
+from mne.stats import permutation_cluster_1samp_test, bootstrap_confidence_interval
+
+# Create the classifier:
+clf = make_pipeline(StandardScaler(), SVC())
+
+# Time resolved
+time_decod = SlidingEstimator(clf, n_jobs=None, scoring=&quot;roc_auc&quot;, verbose=True)
+
+# Extract labels:
+cate_lbl = np.array([mapping[&quot;category&quot;][val] for val in X[:, 0]])
+att_lbl = np.array([mapping[&quot;attention&quot;][val] for val in X[:, 1]])
+
+scores_category = []
+scores_attention = []
+
+# Loop through each subject:
+for epo in epochs:
+    # Extract the data:
+    data = epo.get_data()
+    # Classification of category
+    scores_category.append(
+        np.mean(
+            cross_val_multiscore(
+                time_decod, data, cate_lbl, cv=5, n_jobs=None, verbose=&quot;WARNING&quot;
+            ),
+            axis=0,
+        )
+    )
+    # Classification of attention:
+    scores_attention.append(
+        np.mean(
+            cross_val_multiscore(
+                time_decod, data, att_lbl, cv=5, n_jobs=None, verbose=&quot;WARNING&quot;
+            ),
+            axis=0,
+        )
+    )
+
+scores_category = np.array(scores_category)
+scores_attention = np.array(scores_attention)
+
+# Group level statistics:
+# Cluster based permutation test for the category:
+T_obs, clusters, cluster_p_values, H0 = permutation_cluster_1samp_test(
+    scores_category - 0.5,
+    n_permutations=1024,
+    tail=1,
+    out_type=&quot;mask&quot;,
+    verbose=True,
+)
+sig_mask_cate = np.zeros(len(epochs[0].times), dtype=bool)
+for c, p_val in enumerate(cluster_p_values):
+    if p_val &lt; 0.05:
+        sig_mask_cate[clusters[c]] = True
+
+# Cluster based permutation test for the attention:
+T_obs, clusters, cluster_p_values, H0 = permutation_cluster_1samp_test(
+    scores_attention - 0.5,
+    n_permutations=1024,
+    tail=1,
+    out_type=&quot;mask&quot;,
+    verbose=True,
+)
+sig_mask_att = np.zeros(len(epochs[0].times), dtype=bool)
+for c, p_val in enumerate(cluster_p_values):
+    if p_val &lt; 0.05:
+        sig_mask_att[clusters[c]] = True
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Using a threshold of 1.729133
+stat_fun(H1): min=-2.4367916428540877 max=9.002305238335214
+Running initial clustering …
+Found 5 clusters
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a8107b5650734cc282a0eb5a91560615", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Using a threshold of 1.729133
+stat_fun(H1): min=-2.9773664052347844 max=8.962323124154805
+Running initial clustering …
+Found 4 clusters
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5de09c09896249008b808e93b5c5b8ee", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Plot the results
+fig, ax = plt.subplots(2, 1)
+
+# Plot the results of category decoding:
+ax[0].plot(epochs[0].times, np.mean(scores_category, axis=0), color=&quot;r&quot;)
+ax[0].plot(epochs[0].times, scores_category.T, color=&quot;k&quot;, alpha=0.5, linewidth=0.5)
+
+ax[0].plot(
+    epochs[0].times[sig_mask_cate],
+    np.ones(np.sum(sig_mask_cate)) * 0.4,
+    marker=&quot;o&quot;,
+    linestyle=&quot;None&quot;,
+    color=&quot;b&quot;,
+)
+ax[0].set_title(&quot;Category decoding&quot;)
+ax[0].axhline(0.5, color=&quot;k&quot;, linestyle=&quot;--&quot;, label=&quot;chance&quot;)
+ax[0].set_ylim([0.3, 1.0])
+# Plot the results of attention condition:
+ax[1].plot(epochs[0].times, np.mean(scores_attention, axis=0), color=&quot;r&quot;)
+ax[1].plot(epochs[0].times, scores_attention.T, color=&quot;k&quot;, alpha=0.5, linewidth=0.5)
+ax[1].plot(
+    epochs[0].times[sig_mask_att],
+    np.ones(np.sum(sig_mask_att)) * 0.4,
+    marker=&quot;o&quot;,
+    linestyle=&quot;None&quot;,
+    color=&quot;g&quot;,
+)
+ax[1].set_title(&quot;Attention decoding&quot;)
+ax[1].axhline(0.5, color=&quot;k&quot;, linestyle=&quot;--&quot;, label=&quot;chance&quot;)
+ax[1].set_xlim([epochs[0].times[0], epochs[0].times[-1]])
+ax[1].set_xlabel(&quot;Times&quot;)
+ax[1].set_ylabel(&quot;Decoding accuracy&quot;)
+ax[1].set_ylim([0.3, 1.0])
+ax[1].legend()
+plt.tight_layout()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_meeg_simulator_intersubject_noise_7_0.png" src="../_images/tutorial_meeg_simulator_intersubject_noise_7_0.png" />
+</div>
+</div>
+<p>The results seem similar to what we had before, though the variance of each subjects decoding is quite high. By comparison, here is what the results look like if we fix the intersubject variance:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sims = Simulator(
+    X,  # Design matrix
+    noise_std,  # Observation noise
+    n_channels,  # Number of channelss
+    n_subjects,  # Number of subjects
+    tmin,
+    tmax,  # Start and end of epochs
+    sfreq,  # Sampling frequency of the data
+    t_win,  # Time window of the effects
+    effects,  # Which effects
+    ch_cov=ch_cov,  # Spatial covariance of the data
+    kern=kernel,  # Temporal kernel,
+    intersub_noise_std=0,  # Intersubject variability
+)
+epochs = sims.export_to_mne(X=X[:, :2], cond_names=cond_names, mapping=mapping)
+
+# Apply decoding:
+scores_category = []
+scores_attention = []
+
+# Loop through each subject:
+for epo in epochs:
+    # Extract the data:
+    data = epo.get_data()
+    # Classification of category
+    scores_category.append(
+        np.mean(
+            cross_val_multiscore(
+                time_decod, data, cate_lbl, cv=5, n_jobs=None, verbose=&quot;WARNING&quot;
+            ),
+            axis=0,
+        )
+    )
+    # Classification of attention:
+    scores_attention.append(
+        np.mean(
+            cross_val_multiscore(
+                time_decod, data, att_lbl, cv=5, n_jobs=None, verbose=&quot;WARNING&quot;
+            ),
+            axis=0,
+        )
+    )
+
+scores_category = np.array(scores_category)
+scores_attention = np.array(scores_attention)
+
+# Plot the results:
+fig, ax = plt.subplots(2, 1)
+
+# Plot the results of category decoding:
+ax[0].plot(epochs[0].times, np.mean(scores_category, axis=0), color=&quot;r&quot;)
+ax[0].plot(epochs[0].times, scores_category.T, color=&quot;k&quot;, alpha=0.5, linewidth=0.5)
+ax[0].set_title(&quot;Category decoding&quot;)
+ax[0].axhline(0.5, color=&quot;k&quot;, linestyle=&quot;--&quot;, label=&quot;chance&quot;)
+ax[0].set_ylim([0.3, 1.0])
+# Plot the results of attention condition:
+ax[1].plot(epochs[0].times, np.mean(scores_attention, axis=0), color=&quot;r&quot;)
+ax[1].plot(epochs[0].times, scores_attention.T, color=&quot;k&quot;, alpha=0.5, linewidth=0.5)
+ax[1].set_title(&quot;Attention decoding&quot;)
+ax[1].axhline(0.5, color=&quot;k&quot;, linestyle=&quot;--&quot;, label=&quot;chance&quot;)
+ax[1].set_xlim([epochs[0].times[0], epochs[0].times[-1]])
+ax[1].set_xlabel(&quot;Times&quot;)
+ax[1].set_ylabel(&quot;Decoding accuracy&quot;)
+ax[1].set_ylim([0.3, 1.0])
+ax[1].legend()
+plt.tight_layout()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+Not setting metadata
+160 matching events found
+No baseline correction applied
+0 projection items activated
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_meeg_simulator_intersubject_noise_9_1.png" src="../_images/tutorial_meeg_simulator_intersubject_noise_9_1.png" />
+</div>
+</div>
+<p>As you can see, when no between subject variance is specified, the decoding accuracy is more concentrated around the mean, which makes sense. Adding a between subject variance term make the data more realistic, as you will typically have subjects for which the decoding accuracy is really high, and others not so much So overall, when you specify both a kernel for your data as well as an intersubject variability term, you get data that are really plausible, making their use to test your pipelines
+all the more realistic. Now, the next step is to determine how to actually decide on all these parameters (effect amplitude, within subject noise and between subject noise). This is what we will show you in the next tutorial</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1.-Setting-up-the-simulation">1. Setting up the simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.-Simulating-the-data">2. Simulating the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#3.-Decoding-analysis-and-plotting">3. Decoding analysis and plotting</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorial/meeg_simulator_intersubject_noise.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Alex Lepauvre.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

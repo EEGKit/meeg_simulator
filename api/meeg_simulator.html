@@ -298,86 +298,11 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 </section>
-<section id="module-meeg_simulator.simulator">
-<span id="meeg-simulator-simulator-module"></span><h2>meeg_simulator.simulator module<a class="headerlink" href="#module-meeg_simulator.simulator" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="meeg_simulator.simulator.simulate_data">
-<span class="sig-prename descclassname"><span class="pre">meeg_simulator.simulator.</span></span><span class="sig-name descname"><span class="pre">simulate_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_subjects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfreq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_win</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effects_amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spat_cov</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ch_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'eeg'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#meeg_simulator.simulator.simulate_data" title="Link to this definition">#</a></dt>
-<dd><p>Simulate epoched MEG/EEG data with multivariate patterns.</p>
-<p>This function generates simulated EEG/MEG data with predefined experimental
-effects, allowing for controlled evaluation of analysis methods. Effects are
-introduced at specified time windows, serving as ground truth signals.
-The data is structured into epochs, making it compatible with <cite>mne.Epochs</cite>.</p>
-<p>The method used here is based on the approach implemented in <strong>SPM’s `DEMO_CVA_RSA.m`</strong>
-function, originally developed by <strong>Karl Friston and Peter Zeidman</strong> <a class="reference internal" href="#r7cb46c37d7bb-1" id="id1">[1]</a>.
-Our implementation extends their method by incorporating <strong>time-resolved effects</strong>,
-allowing for dynamic experimental manipulations over specified time windows.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_trials</em><em>, </em><em>n_experimental_conditions</em><em>)</em>) – Between-trial design matrix specifying experimental manipulations.</p></li>
-<li><p><strong>noise_std</strong> (<em>float</em>) – Standard deviation of additive Gaussian noise (applied before spatial covariance).</p></li>
-<li><p><strong>n_modes</strong> (<em>int</em>) – Number of spatial modes (e.g., sensors or components) in the simulated data.</p></li>
-<li><p><strong>n_subjects</strong> (<em>int</em>) – Number of subjects to simulate.</p></li>
-<li><p><strong>tmin</strong> (<em>float</em>) – Start time (in seconds) of each epoch.</p></li>
-<li><p><strong>tmax</strong> (<em>float</em>) – End time (in seconds) of each epoch.</p></li>
-<li><p><strong>sfreq</strong> (<em>float</em>) – Sampling frequency in Hz.</p></li>
-<li><p><strong>t_win</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_effects</em><em>, </em><em>2</em><em>)</em>) – Time windows (start, end) in seconds where each experimental effect is nonzero.</p></li>
-<li><p><strong>effects</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_effects</em><em>,</em><em>)</em>) – Indices of the experimental conditions (columns of <cite>X</cite>) associated with
-time-locked effects. Each entry corresponds to a row in <cite>t_win</cite>.</p></li>
-<li><p><strong>effects_amp</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_effects</em><em>,</em><em>) </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – Amplitudes of the effects. Effects are simulated by sampling beta parameters
-from a normal distribution across channels, with <cite>effects_amp</cite> defining
-the variance of the distribution. Default is None (scales are uniform).</p></li>
-<li><p><strong>spat_cov</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_modes</em><em>, </em><em>n_modes</em><em>) </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – Spatial covariance matrix for the simulated data. If None, an identity
-matrix is used (i.e., no cross-channel correlations).</p></li>
-<li><p><strong>ch_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of simulated channels, e.g., <cite>‘eeg’</cite> or <cite>‘meg’</cite>. Default is <cite>‘eeg’</cite>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>epochs_list</strong> – A list of <cite>mne.Epochs</cite> objects, one per subject (length <cite>n_subjects</cite>).</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of mne.Epochs</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the number of rows in <cite>t_win</cite> does not match the length of <cite>effects</cite>.</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<ul class="simple">
-<li><p>This function follows the <strong>same methodological principles</strong> as <cite>DEMO_CVA_RSA.m</cite> from SPM,
-but extends it by adding time-resolved experimental effects.</p></li>
-<li><p>The original implementation in SPM was developed by <strong>Karl Friston and Peter Zeidman</strong>.</p></li>
-<li><p>The generated data follows an event-related structure, suitable for
-classification and decoding analyses.</p></li>
-<li><p>Effects are injected into selected experimental conditions based on <cite>X</cite>.</p></li>
-</ul>
-<p class="rubric">References</p>
-<div role="list" class="citation-list">
-<div class="citation" id="r7cb46c37d7bb-1" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Friston, K., &amp; Zeidman, P. “DEMO_CVA_RSA.m”, Statistical Parametric Mapping (SPM).
-Available at: <a class="github reference external" href="https://github.com/spm/spm/blob/main/toolbox/DEM/DEMO_CVA_RSA.m">spm/spm</a></p>
-</div>
-</div>
-<p class="rubric">Examples</p>
-<p>Simulating a simple dataset with 20 subjects and a single experimental effect:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">meeg_simulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">simulate_data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 100 trials, 2 experimental conditions</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t_win</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>  <span class="c1"># Effect between 200-500 ms</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">effects</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Effect corresponds to second column of X</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">epochs_list</span> <span class="o">=</span> <span class="n">simulate_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">noise_std</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">n_modes</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">n_subjects</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">tmin</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">sfreq</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">t_win</span><span class="o">=</span><span class="n">t_win</span><span class="p">,</span> <span class="n">effects</span><span class="o">=</span><span class="n">effects</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">epochs_list</span><span class="p">))</span>  <span class="c1"># Should return 20 subjects</span>
-</pre></div>
-</div>
-</dd></dl>
-
+<section id="meeg-simulator-simulator-module">
+<h2>meeg_simulator.simulator module<a class="headerlink" href="#meeg-simulator-simulator-module" title="Link to this heading">#</a></h2>
 </section>
-<section id="module-meeg_simulator">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-meeg_simulator" title="Link to this heading">#</a></h2>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -429,11 +354,8 @@ Available at: <a class="github reference external" href="https://github.com/spm/
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-meeg_simulator.simulator">meeg_simulator.simulator module</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#meeg_simulator.simulator.simulate_data"><code class="docutils literal notranslate"><span class="pre">simulate_data()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-meeg_simulator">Module contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#meeg-simulator-simulator-module">meeg_simulator.simulator module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-contents">Module contents</a></li>
 </ul>
   </nav></div>
 
